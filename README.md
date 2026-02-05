@@ -1,13 +1,13 @@
 Dataset - https://www.kaggle.com/datasets/carrie1/ecommerce-data
 
-ENVIRONMENT - PostgreSQL
+`ENVIRONMENT - PostgreSQL`
 
-Setup
-Table Creation
+`Setup
+Table Creation`
 
-DROP TABLE IF EXISTS orders;
+`DROP TABLE IF EXISTS orders;`
 
-CREATE TABLE orders (
+`CREATE TABLE orders (
     row_id SERIAL PRIMARY KEY,
     InvoiceNo TEXT,
     StockCode TEXT,
@@ -17,15 +17,15 @@ CREATE TABLE orders (
     UnitPrice NUMERIC,   -- Column 6
     CustomerID TEXT,    -- Column 7
     Country TEXT        -- Column 8
-);
+);`
 
--- 1. Standard Date Fix
-SET datestyle TO 'ISO, MDY';
+`-- 1. Standard Date Fix
+SET datestyle TO 'ISO, MDY';`
 
--- 2. Clear the table
-TRUNCATE TABLE orders;
+`-- 2. Clear the table
+TRUNCATE TABLE orders;`
 
--- 3. Run the COPY with the correct encoding
+`-- 3. Run the COPY with the correct encoding
 COPY orders(InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country)
 FROM 'C:/Users/Public/data.csv' 
 WITH (
@@ -33,6 +33,6 @@ WITH (
     HEADER true, 
     DELIMITER ',',
     ENCODING 'WIN1252'  -- This tells Postgres to expect characters like £
-);
+);`
 
 
