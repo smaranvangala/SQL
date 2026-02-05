@@ -92,6 +92,10 @@ FROM orders
 GROUP BY CustomerID HAVING COUNT(DISTINCT(InvoiceNo))> 10;
 
 -- Q20: List the 10 most recent transactions.
+SELECT *
+FROM orders
+ORDER BY InvoiceDate
+LIMIT 10;
 
 -- Q21: Select transactions where Country is 'Germany' OR 'Spain'.
 SELECT *
@@ -145,23 +149,106 @@ FROM orders
 GROUP BY StockCode HAVING SUM(Quantity) >500;
 
 -- Q31: Retrieve customers who bought more than 3 different products.
+SELECT customerID, Count(DISTINCT(StockCode)) AS total_units
+FROM orders
+GROUP BY CustomerID HAVING COUNT(DISTINCT(StockCode)) > 3
+ORDER BY total_units DESC;
 
 -- Q32: Find the total quantity of items sold.
+SELECT COUNT(DISTINCT(StockCode))
+FROM orders;
+
 -- Q33: Sort all transactions by InvoiceDate ascending.
+SELECT *
+FROM orders
+ORDER BY InvoiceDate ASC;
+
 -- Q34: List customers from 'Germany' using DISTINCT.
+SELECT DISTINCT CustomerID, Country
+FROM orders
+WHERE Country = 'Germany';
+
 -- Q35: Find rows where Description contains 'SET'.
+SELECT *
+FROM orders
+WHERE Description LIKE '%SET%';
+
 -- Q36: Calculate the average unit price per country.
+SELECT Country, ROUND(AVG(UnitPrice),2) AS avg_unit_price
+FROM orders
+GROUP BY Country;
+
 -- Q37: Display the 5 largest quantities sold in a single transaction.
+SELECT *
+FROM orders
+ORDER BY Quantity DESC
+LIMIT 5;
+
 -- Q38: Retrieve rows where UnitPrice is less than 2.
+SELECT *
+FROM orders
+WHERE UnitPrice < 2;
+
 -- Q39: List all distinct product descriptions.
+SELECT DISTINCT Descriotion
+FROM orders;
+
 -- Q40: Find countries with more than 1,000 transactions.
+SELECT Country, COUNT(DISTINCT(InvoiceNo)) AS transaction_count
+FROM orders
+GROUP BY Country HAVING COUNT(DISTINCT(InvoiceNo)) > 1000
+ORDER BY transaction_count;
+
 -- Q41: Count how many invoices each customer has.
+SELECT CustomerID, COUNT(DISTINCT InvoiceNo) AS total_invoice_count
+FROM orders
+WHERE CustomerID IS NOT NULL
+GROUP BY CustomerID
+ORDER BY total_invoice_count DESC;
+
 -- Q42: Retrieve transactions where Quantity is BETWEEN 1 AND 3.
+SELECT *
+FROM orders
+WHERE Quantity BETWEEN 1 AND 3;
+
 -- Q43: Sort transactions by UnitPrice descending.
+SELECT *
+FROM orders
+ORDER BY UnitPrice DESC;
+
 -- Q44: Find customers whose total quantity purchased is greater than 100.
+SELECT CustomerID, SUM(Quantity) AS total_purchase
+FROM orderS
+GROUP BY CustomerID HAVING SUM(Quantity) > 100
+ORDER BY total_purchase DESC;
+
 -- Q45: Retrieve all rows where Country is 'United Kingdom'.
+SELECT *
+FROM orders
+WHERE Country = 'United Kingdom';
+
 -- Q46: Find countries with at least 50 distinct customers.
+SELECT Country, COUNT(DISTINCT CustomerID) AS unique_customer
+FROM orders
+GROUP BY Country HAVING COUNT(DISTINCT CustomerID) > 50
+ORDER BY unique_customer;
+
 -- Q47: Select only InvoiceNo, InvoiceDate, and CustomerID.
+SELECT InvoiceNo, InvoiceDate, CustomerID
+FROM orders
+
 -- Q48: Find the top 5 countries by total quantity sold.
+SELECT Country, COUNT(Quantity) AS total_quantity
+FROM orders
+GROUP BY Country
+ORDER BY total_quantity DESC
+LIMIT 5;
+
 -- Q49: Display all column names and data types for the table.
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'orders';
+
 -- Q50: Select all columns from the ecommerce table.
+SELECT *
+FROM orders;
