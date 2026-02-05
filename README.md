@@ -1,3 +1,5 @@
+BASIC_SQL
+
 Dataset - https://www.kaggle.com/datasets/carrie1/ecommerce-data
 
 `ENVIRONMENT - PostgreSQL`
@@ -33,5 +35,42 @@ WITH (
     HEADER true, 
     DELIMITER ',',
     ENCODING 'WIN1252'  -- This tells Postgres to expect characters like £
+);
+```
+
+INTERMEDIATE_SQL
+
+Dataset - https://www.kaggle.com/datasets/emmanueltugbeh/northwind-orders-and-order-details/data
+
+`ENVIRONMENT - PostgreSQL`
+`Setup
+Table Creation`
+
+``` sql
+CREATE TABLE orders (
+	order_id INT,
+	customer_id TEXT,
+	employee_id INT,
+	order_date DATE,
+	required_date DATE,
+	shipped_date DATE,
+	ship_via INT,
+	freight NUMERIC(10,2),
+	ship_name TEXT,
+	ship_address TEXT,
+	ship_city TEXT,
+	ship_region TEXT,
+	ship_postal_code TEXT,
+	ship_country TEXT
+);
+```
+
+``` sql
+CREATE TABLE order_details (
+	order_id INT,
+	product_id INT,
+	unit_price NUMERIC(10,2),
+	quantity INT,
+	discount NUMERIC(10,2)
 );
 ```
