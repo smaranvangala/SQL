@@ -3,18 +3,38 @@ SELECT DISTINCT(*)
 FROM orders;
 
 -- Q2: Find transactions where UnitPrice is BETWEEN 1 AND 5.
+SELECT CustomerID
+FROM orders
+WHERE UnitPrice BETWEEN 1 AND 5;
 
 -- Q3: Count the total number of rows in the table.
+SELECT COUNT(*)
+FROM orders;
 
 -- Q4: Retrieve customers with an average unit price above 4.
+SELECT CustomerID, ROUND(AVG(UnitPrice),2)
+FROM orders
+GROUP BY CustomerID HAVING AVG(UnitePrice) > 4;
 
 -- Q5: Select rows where Country is NOT 'United Kingdom'.
+SELECT Country
+FROM orders
+WHERE Country != 'United Kingdom';
 
 -- Q6: Display the top 10 most expensive items by UnitPrice.
+SELECT UnitPrice
+FROM orders
+ORDER BY UnitPrice DESC
+LIMIT 10;
 
 -- Q7: Find products whose Description contains the word 'HEART'.
+SELECT Description
+FROM orders
+WHERE Description LIKE '%HEART%';
 
 -- Q8: Count how many distinct CustomerID exist.
+SELECT COUNT(CustomerID)
+FROM orders;
 
 -- Q9: Find countries where the average unit price is greater than 5.
 
