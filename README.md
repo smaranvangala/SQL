@@ -18,3 +18,20 @@ CREATE TABLE orders (
     Country TEXT        -- Column 8
 );
 ```
+``` sql
+-- 1. Standard Date Fix
+SET datestyle TO 'ISO, MDY';
+
+-- 2. Clear the table
+TRUNCATE TABLE orders;
+
+-- 3. Run the COPY with the correct encoding
+COPY orders(InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country)
+FROM 'C:/Users/Public/data.csv' 
+WITH (
+    FORMAT CSV, 
+    HEADER true, 
+    DELIMITER ',',
+    ENCODING 'WIN1252'  -- This tells Postgres to expect characters like £
+);
+```
